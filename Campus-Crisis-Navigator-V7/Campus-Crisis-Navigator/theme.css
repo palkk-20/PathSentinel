@@ -1,0 +1,187 @@
+/* Campus Crisis Navigator - wayfinding theme (loads after style.css)
+   Idea: campus signage + transit map. Ink-blue chrome, one route colour (teal), amber for "you are here",
+   red only for crisis. Type is signage-style (Bahnschrift/Segoe UI) with no external fonts. */
+
+:root{
+  --bg:#eaf0f2; --card:#ffffff; --text:#0f2530; --muted:#5c7280; --line:#d5e0e5;
+  --blue:#0a7a73; --blue-soft:#e0f2f0; --green:#13885a; --red:#d6334a; --amber:#f0a30a;
+  --ink:#0f2a38; --ink-2:#17394b;
+  --shadow:0 1px 2px rgba(15,37,48,.06),0 10px 28px rgba(15,37,48,.07);
+  --radius:14px;
+}
+.dark{
+  --bg:#0a161d; --card:#112530; --text:#e6f0f3; --muted:#8fa8b4; --line:#223c4a;
+  --blue:#2fc4b8; --blue-soft:#0f3a3d; --ink:#07121a; --ink-2:#0f2a38;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px rgba(0,0,0,.28);
+}
+
+html body{
+  font-family:Bahnschrift,"Segoe UI Variable","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  background:var(--bg);color:var(--text);font-size:15px;line-height:1.45;
+  -webkit-font-smoothing:antialiased;
+}
+html body h1,html body h2{letter-spacing:-.01em}
+
+/* ---------- top bar ---------- */
+html body .topbar{
+  height:64px!important;background:var(--ink)!important;color:#fff;
+  border-bottom:3px solid var(--blue)!important;box-shadow:none!important;backdrop-filter:none!important;
+}
+html body .topbar .brand strong{color:#fff;font-size:17px}
+html body .topbar .brand small{color:#9fc0cc;font-size:11px}
+html body .topbar .logo{background:var(--amber);color:var(--ink);border-radius:10px;font-weight:900;letter-spacing:-.5px}
+html body .topbar .account-badge{background:rgba(255,255,255,.1)!important;color:#e8f3f6!important;border:1px solid rgba(255,255,255,.18)!important}
+html body .topbar .online{color:#7ee2b8}
+html body .topbar .online i{background:#7ee2b8}
+html body .topbar .icon-btn{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:10px;min-width:40px;font-size:15px}
+html body .topbar .icon-btn:hover{background:rgba(255,255,255,.2)}
+
+/* ---------- cards, buttons, inputs ---------- */
+html body .card{border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow)}
+html body .primary{background:var(--blue);color:#fff;border-radius:10px;transition:filter .15s,transform .05s}
+html body.dark .primary{color:#06201e}
+html body .primary:hover{filter:brightness(1.08)}
+html body .primary:active,html body .next-btn:active{transform:translateY(1px)}
+html body .secondary{background:var(--blue-soft);color:var(--text);border:1px solid var(--line);border-radius:10px}
+html body .secondary:hover{border-color:var(--blue)}
+html body .next-btn{background:var(--ink);color:#fff;border-radius:10px}
+html body.dark .next-btn{background:var(--amber);color:#2a1d00}
+html body .planner-grid select,html body .editor-form input,html body .editor-form select{
+  border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px}
+html body .planner-grid select:focus,html body .editor-form input:focus,html body .editor-form select:focus{
+  border-color:var(--blue);box-shadow:0 0 0 3px rgba(10,122,115,.18)}
+html body :focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+html body .eyebrow{color:var(--blue);letter-spacing:.08em}
+html body .method,html body .count-badge{background:var(--blue-soft);color:var(--blue)}
+html body .back-btn{border-radius:10px;font-weight:700}
+
+/* ---------- home ---------- */
+html body .welcome{
+  background:var(--ink);border:0;position:relative;overflow:hidden;border-radius:18px;padding:38px 36px;
+}
+html body .welcome:before{ /* transit-line motif: a route with stations */
+  content:"";position:absolute;left:36px;right:36px;bottom:0;height:6px;border-radius:6px 6px 0 0;
+  background:linear-gradient(90deg,var(--blue) 0 55%,var(--amber) 55% 62%,#ffffff22 62%);
+}
+html body .welcome h1{font-size:40px;font-weight:800;line-height:1.08}
+html body .welcome .eyebrow{color:var(--amber)}
+html body .welcome p{color:#cfe2e9}
+html body .algorithm-pill{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:12px}
+html body .algorithm-pill b{color:var(--amber)}
+html body .choice-card{border-radius:var(--radius);border:1px solid var(--line);border-left:5px solid var(--blue);background:var(--card)}
+html body .choice-card:hover{transform:translateY(-2px);border-color:var(--blue);box-shadow:0 12px 30px rgba(10,122,115,.16)}
+html body .choice-icon{background:var(--blue-soft);border-radius:12px}
+html body .arrow{color:var(--blue)}
+html body .mini-stats div{border-radius:12px;border:1px solid var(--line);border-top:3px solid var(--blue);background:var(--card)}
+html body .mini-stats b{font-size:26px;font-weight:800}
+
+/* ---------- map ---------- */
+html body .map-stage{
+  background:
+    linear-gradient(rgba(10,122,115,.07) 1px,transparent 1px) 0 0/36px 36px,
+    linear-gradient(90deg,rgba(10,122,115,.07) 1px,transparent 1px) 0 0/36px 36px,
+    #f4f8f6;
+  border:1px solid var(--line);border-radius:14px;
+}
+html body.dark .map-stage{
+  background:
+    linear-gradient(rgba(47,196,184,.08) 1px,transparent 1px) 0 0/36px 36px,
+    linear-gradient(90deg,rgba(47,196,184,.08) 1px,transparent 1px) 0 0/36px 36px,
+    #0c1f28;
+  border-color:var(--line);
+}
+html body .map-stage:before{display:none}
+html body .road{stroke:#a9bcc6;stroke-width:1.6}
+html body.dark .road{stroke:#3d5968}
+html body .road.active{stroke:var(--blue);stroke-width:3.4}
+html body .road.current-leg{stroke:var(--amber);stroke-width:4}
+html body .road.blocked,html body .road.crisis-road,html body .road.closed-road{stroke:var(--red);stroke-width:3.6;stroke-dasharray:4 3}
+html body .road.slow-road{stroke:var(--amber);stroke-width:3.4;stroke-dasharray:2 2}
+.weight-tag{
+  position:absolute;transform:translate(-50%,-50%);z-index:1;pointer-events:none;
+  min-width:22px;padding:1px 6px;border-radius:999px;text-align:center;
+  background:var(--card);color:var(--muted);border:1px solid var(--line);font-size:10.5px;font-weight:800;line-height:1.5;
+}
+html body .building .building-icon{border:2px solid #9db3be;border-radius:12px;background:var(--card);box-shadow:0 3px 8px rgba(15,37,48,.14)}
+html body.dark .building .building-icon{border-color:#3d5968;background:#122935}
+html body .building .code{background:var(--ink);color:#fff;border-radius:5px}
+html body.dark .building .code{background:var(--blue);color:#06201e}
+html body .building .name{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:6px;font-weight:700}
+html body .building.start .building-icon{border-color:var(--green);box-shadow:0 0 0 4px rgba(19,136,90,.18)}
+html body .building.destination .building-icon{border-color:var(--blue);box-shadow:0 0 0 4px rgba(10,122,115,.2)}
+html body .building.current .building-icon{border-color:var(--amber);box-shadow:0 0 0 5px rgba(240,163,10,.3),0 5px 12px rgba(0,0,0,.18)}
+html body .building.current:after{color:#b97a00;font-weight:900}
+html body.dark .building.current:after{color:var(--amber)}
+html body .legend{color:var(--muted)}
+.start-dot{background:var(--green)!important}.route-dot{background:var(--blue)!important}.blocked-dot{background:var(--red)!important}.current-dot{background:var(--amber)!important}
+
+/* ---------- route + walking panels ---------- */
+html body .route-item{border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--text)}
+html body .route-item:hover{border-color:var(--blue)}
+html body .route-item.selected{border:2px solid var(--blue);background:var(--blue-soft)}
+html body .route-cost{color:var(--blue)}
+html body .you-are{background:var(--blue-soft);border-radius:12px}
+html body .direction-box{background:var(--blue-soft);border-left:4px solid var(--amber);border-radius:12px}
+html body .progress-track{background:var(--line);height:7px}
+html body .progress-track div{background:linear-gradient(90deg,var(--blue),var(--amber))}
+html body .journey-step.current>span{background:var(--amber);color:#2a1d00}
+html body .journey-step.done>span{background:#d6f1e4;color:#0d6e47}
+html body .status.walking{background:var(--blue-soft);color:var(--blue)}
+html body .status.danger{background:#fde4e8;color:#b02037}
+html body .status.reroute{background:#fff0cf;color:#8a5b00}
+html body .status.ready{background:var(--line);color:var(--muted)}
+html body .live-stats,html body .summary{background:var(--blue-soft);color:var(--text);border-radius:10px}
+html body .walk-actions{grid-template-columns:1fr 1fr}
+html body .walk-actions #startNavBtn{grid-column:1 / -1}
+html body .crisis-pin{background:var(--red);color:#fff;border-radius:10px;box-shadow:0 4px 12px rgba(214,51,74,.4)}
+html body .walker{filter:drop-shadow(0 3px 4px rgba(0,0,0,.3))}
+
+/* ---------- crisis control centre ---------- */
+html body .crisis-hero{
+  background:var(--ink);color:#fff;border:0;border-left:6px solid var(--red);
+}
+html body .crisis-hero h2{color:#fff}
+html body .crisis-hero p{color:#cfe2e9;max-width:640px}
+html body .crisis-hero .eyebrow{color:var(--amber)}
+.sim-switch{display:inline-flex;align-items:center;gap:10px;margin-top:12px;padding:9px 13px;border-radius:10px;
+  background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);color:#fff;font-weight:700;font-size:13px;cursor:pointer}
+.sim-switch input{width:18px;height:18px;accent-color:var(--amber);cursor:pointer}
+html body .crisis-open-pill{background:var(--red);color:#fff}
+html body .active-crisis-row{border:1px solid var(--line);border-left:5px solid var(--red);border-radius:12px;background:var(--card)}
+html body .live-status-pill{background:var(--red);color:#fff;border-radius:999px;font-size:10px;font-weight:900;padding:2px 8px;margin-left:8px}
+.impact-line{margin:8px 0 0;padding:8px 11px;border-radius:9px;background:#fff0cf;color:#6b4700;font-size:12.5px;line-height:1.45}
+.dark .impact-line{background:#3a2d0b;color:#ffd98a}
+html body .crisis-action-help{color:var(--muted);font-size:12px}
+html body .stop-crisis-btn{background:var(--card)}
+
+/* ---------- dialog, toast, auth ---------- */
+html body .crisis-dialog{border-radius:18px;border-top:6px solid var(--red);background:var(--card);color:var(--text)}
+html body .dialog-tag{color:var(--red)}
+html body .toast{background:var(--ink);color:#fff;border-left:4px solid var(--amber);border-radius:10px}
+html body .auth-screen{background:var(--ink)}
+html body .auth-brand,html body .auth-brand span{color:#cfe2e9}
+html body .auth-brand strong{color:#fff}
+html body .auth-logo{background:var(--amber);color:var(--ink)}
+html body .auth-card{background:var(--card);border:0;border-radius:18px}
+html body .auth-card:before{background:linear-gradient(90deg,var(--blue) 0 60%,var(--amber) 60%)}
+html body .auth-tab.active{background:var(--blue);color:#fff}
+html body .auth-tabs{background:var(--blue-soft)}
+html body .auth-form input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(10,122,115,.18)}
+
+/* ---------- responsive + motion ---------- */
+@media (max-width:860px){
+  html body .welcome h1{font-size:30px}
+  html body .topbar .brand small,html body .topbar .online{display:none}
+  html body .campus-map,html body .map-stage{height:520px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* v31 additions */
+.crisis-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{font-size:10px;font-weight:700;padding:3px 8px;border-radius:999px;letter-spacing:.02em}
+.chip-block{background:#fde8e8;color:#b42318}.chip-slow{background:#fff4d6;color:#8a5a00}.chip-crit{background:#ede7ff;color:#5b34b8}
+.route-tag{display:inline-block;margin-top:5px;font-style:normal;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px}
+.tag-ok{background:#e5f8ee;color:#0e8550}.tag-slow{background:#fff4d6;color:#8a5a00}
+.impact-line{display:block;margin-top:4px;color:#b45309;font-weight:600}
+body.dark .chip-block{background:#3b1d1d;color:#ffb4b4}body.dark .chip-slow{background:#3a2e10;color:#ffd77a}body.dark .chip-crit{background:#2a2250;color:#cdbbff}
+body.dark .tag-ok{background:#12301f;color:#6ee7a8}body.dark .tag-slow{background:#3a2e10;color:#ffd77a}

@@ -1,0 +1,133 @@
+/* Campus Crisis Navigator - Professional interface (loads last).
+   Clean slate + one blue accent; red only for crises. Visual layer only: no layout/logic changes. */
+:root{
+  --bg:#f3f5f9; --card:#ffffff; --text:#0f172a; --muted:#64748b; --line:#e2e8f0;
+  --blue:#1d4ed8; --blue-soft:#eff4ff; --green:#059669; --red:#dc2626; --amber:#d97706; --cyan:#0ea5e9;
+  --ink:#0b1220; --ink-2:#172036;
+  --grad:#1d4ed8;
+  --shadow:0 1px 2px rgba(15,23,42,.05),0 4px 14px rgba(15,23,42,.05);
+  --radius:12px;
+}
+.dark{
+  --bg:#0b1220; --card:#111a2e; --text:#e5eaf3; --muted:#93a1b8; --line:#222f48;
+  --blue:#60a5fa; --blue-soft:#14213d; --green:#34d399; --red:#f87171; --amber:#fbbf24;
+  --ink:#070d19; --ink-2:#101a30;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.28);
+}
+html body{
+  font-family:Inter,"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  font-size:14.5px;line-height:1.5;background:var(--bg);background-image:none;color:var(--text);
+  -webkit-font-smoothing:antialiased;
+}
+html body h1,html body h2,html body h3{letter-spacing:-.015em;font-weight:700;color:var(--text)}
+
+/* ---- top bar ---- */
+html body .topbar{background:var(--card)!important;color:var(--text)!important;height:62px!important;
+  border-bottom:1px solid var(--line)!important;box-shadow:0 1px 0 rgba(15,23,42,.02)!important}
+html body .topbar .brand strong{color:var(--text);font-size:16px;font-weight:700}
+html body .topbar .brand small{color:var(--muted);font-size:12px}
+html body .topbar .logo{background:#0f2a6b;color:#fff;border-radius:10px;font-weight:800;letter-spacing:0}
+html body .topbar .account-badge{background:var(--blue-soft)!important;color:var(--blue)!important;border:1px solid var(--line)!important;border-radius:999px;font-weight:600}
+html body .topbar .online,html body .topbar .online i{color:var(--green);animation:none}
+html body .topbar .online i{background:var(--green);box-shadow:none}
+html body .topbar .icon-btn{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:10px;box-shadow:none}
+html body .topbar .icon-btn:hover{background:var(--blue-soft);border-color:var(--blue)}
+
+/* ---- cards / buttons / inputs ---- */
+html body .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+html body .primary,html body .next-btn{background:var(--blue);color:#fff;border:0;border-radius:10px;font-weight:600;box-shadow:none;transform:none}
+html body.dark .primary,html body.dark .next-btn{color:#06101f}
+html body .primary:hover,html body .next-btn:hover{filter:brightness(1.08);transform:none}
+html body .secondary{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:10px;font-weight:600}
+html body .secondary:hover{background:var(--blue-soft);border-color:var(--blue)}
+html body .back-btn{background:var(--card);border:1px solid var(--line);border-radius:10px;font-weight:600;box-shadow:none}
+html body .swap{background:var(--blue);box-shadow:none;border-radius:50%}
+html body .swap:hover{transform:none}
+html body select,html body input:not([type=checkbox]),html body textarea{
+  border-radius:10px!important;border:1px solid var(--line)!important;background:var(--card);color:var(--text);box-shadow:none}
+html body select:focus,html body input:focus,html body textarea:focus{border-color:var(--blue)!important;box-shadow:0 0 0 3px rgba(29,78,216,.15)}
+html body :focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+html body .eyebrow{color:var(--blue);letter-spacing:.1em;font-weight:700;font-size:11.5px}
+html body .method,html body .count-badge{background:var(--blue-soft);color:var(--blue);border:1px solid var(--line)}
+
+/* ---- home ---- */
+html body .welcome{background:linear-gradient(120deg,#0b1f4d,#1d4ed8);border:0;border-radius:16px;padding:40px 38px;box-shadow:var(--shadow)}
+html body .welcome:before,html body .welcome:after{display:none}
+html body .welcome h1{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:#fff;font-size:36px;font-weight:700;-webkit-text-fill-color:#fff}
+html body .welcome .eyebrow{color:#bfdbfe}
+html body .welcome p{color:#dbe7ff;max-width:640px}
+html body .choice-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);transition:border-color .15s,box-shadow .15s}
+html body .choice-card:before{display:none}
+html body .choice-card:hover{transform:none;border-color:var(--blue);box-shadow:0 6px 20px rgba(29,78,216,.12)}
+html body .choice-icon{background:var(--blue-soft);border-radius:10px}
+html body .arrow{background:var(--blue-soft);color:var(--blue)}
+html body .mini-stats>div,html body .mini-stats div{background:var(--card);border:1px solid var(--line);border-top:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+html body .mini-stats b{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--blue);-webkit-text-fill-color:var(--blue);font-weight:700}
+
+/* ---- navigation / routes / walking ---- */
+html body .route-item{background:var(--card);border:1px solid var(--line);border-radius:10px;transition:border-color .15s,background .15s}
+html body .route-item:hover{transform:none;border-color:var(--blue)}
+html body .route-item.selected{border:1.5px solid var(--blue);background:var(--blue-soft);box-shadow:none}
+html body .route-cost{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--blue);-webkit-text-fill-color:var(--blue);font-weight:700}
+html body .you-are,html body .live-stats,html body .summary{background:var(--blue-soft);border-radius:10px}
+html body .direction-box{background:var(--blue-soft);border-left:3px solid var(--blue);border-radius:10px}
+html body .progress-track{background:var(--line);height:6px;border-radius:6px}
+html body .progress-track div,html body #progressBar{background:var(--blue)}
+html body .journey-step.current>span{background:var(--blue);color:#fff}
+html body .journey-step.done>span{background:#d1fae5;color:#047857}
+html body .status.ready{background:var(--line);color:var(--muted)}
+html body .status.walking{background:var(--blue-soft);color:var(--blue)}
+
+/* ---- map ---- */
+html body .campus-map,html body .editor-map{border-radius:12px;overflow:hidden}
+html body .road{stroke:#94a3b8;stroke-width:3}
+html body .road.active{stroke:#2563eb;stroke-width:5}
+html body .road.current-leg{stroke:#f59e0b;stroke-width:6}
+html body .building .building-icon{border:2px solid #94a3b8;border-radius:10px;background:#fff;box-shadow:0 2px 6px rgba(15,23,42,.25)}
+html body .building .code{background:#0f2a6b;color:#fff;border-radius:5px}
+html body .building .name{background:#fff;color:#0f172a;border:1px solid #cbd5e1;border-radius:6px;font-weight:600;box-shadow:0 1px 3px rgba(15,23,42,.15)}
+html body .weight-tag{background:#fff;color:#334155;border:1px solid #cbd5e1;box-shadow:0 1px 2px rgba(15,23,42,.15)}
+html body .building.start .building-icon{border-color:var(--green);box-shadow:0 0 0 4px rgba(5,150,105,.2)}
+html body .building.destination .building-icon{border-color:var(--blue);box-shadow:0 0 0 4px rgba(29,78,216,.22)}
+html body .building.current .building-icon{border-color:var(--amber);box-shadow:0 0 0 5px rgba(217,119,6,.28)}
+html body .leaflet-container{font-family:inherit}
+
+/* ---- crisis centre ---- */
+html body .crisis-hero{background:linear-gradient(120deg,#3b0d14,#991b1b);color:#fff;border:0;border-radius:14px}
+html body .crisis-hero h2,html body .crisis-hero p{color:#fff}
+html body .crisis-hero .eyebrow{color:#fecaca}
+html body .crisis-catalog-item{background:var(--card)!important;border:1px solid var(--line)!important;border-radius:12px!important}
+html body .crisis-catalog-item:hover{transform:none;box-shadow:0 6px 18px rgba(15,23,42,.1)}
+html body .crisis-catalog-item.is-active{border-color:var(--red)!important;box-shadow:none}
+html body .active-crisis-row{animation:none;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:10px;background:var(--card)}
+html body .crisis-warn{background:#fef2f2;border:1px solid #fecaca;border-radius:10px;color:#991b1b}
+.dark .crisis-warn{background:#3a1520;border-color:#7f1d1d;color:#fecaca}
+.act-stats b{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--blue);-webkit-text-fill-color:var(--blue)}
+html body .toast{background:#0f172a;color:#fff;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+html body .crisis-dialog{border-radius:16px}
+
+/* ---- sign-in screen ---- */
+html body .auth-screen{background:linear-gradient(160deg,#0b1f4d 0%,#0f172a 100%)}
+html body .auth-card{background:#fff;border:0;border-radius:16px;box-shadow:0 24px 60px rgba(2,6,23,.45)}
+html body .auth-card:before{display:none}
+html body .auth-card h1,html body .auth-card h2{color:#0f172a}
+html body .auth-brand strong{color:#fff}html body .auth-brand small{color:#bfdbfe}
+html body .auth-logo{background:#1d4ed8;color:#fff;border-radius:12px;box-shadow:none}
+html body .auth-tabs{background:#eef2f7;border-radius:10px}
+html body .auth-tab{border-radius:8px;font-weight:600;color:#475569}
+html body .auth-tab.active{background:#fff;color:#1d4ed8;box-shadow:0 1px 3px rgba(15,23,42,.15)}
+html body .auth-submit{background:#1d4ed8!important;border-radius:10px;box-shadow:none;font-weight:600}
+html body .auth-form input{background:#fff;color:#0f172a}
+
+/* ---- polish ---- */
+html body .alert-bar[hidden]{display:none}
+html body .topbar .logo,html body .welcome{box-shadow:none}
+html body .road-form{grid-template-columns:1fr 1fr!important}
+html body .road-form label:nth-child(3){grid-column:1!important}
+html body .road-form #addEdge{grid-column:2!important;align-self:end;width:100%}
+html body .item-list button,html body .item-list .secondary{padding:5px 12px;min-height:0;font-size:12px;border-radius:8px;font-weight:600}
+html body .choice-grid{gap:16px}
+html body .auth-form .primary,html body .auth-submit{transform:none}
+html body .back-btn,html body.dark .back-btn{background:var(--card)!important;color:var(--text)!important;border:1px solid var(--line)!important}
+html body .back-btn:hover{border-color:var(--blue)!important}
+html body.dark .topbar .logo{background:#1e3a8a}

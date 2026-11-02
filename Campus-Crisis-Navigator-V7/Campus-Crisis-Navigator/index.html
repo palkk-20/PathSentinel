@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Campus Crisis Navigator</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="theme2.css">
+<link rel="stylesheet" href="professional.css">
+</head>
+<body>
+<div id="authScreen" class="auth-screen">
+  <div class="auth-shell">
+    <div class="auth-brand"><div class="auth-logo">CC</div><div><strong>Campus Navigator</strong><span>Campus Crisis Navigator</span></div></div>
+    <div class="auth-card">
+      <div class="auth-head"><span class="eyebrow">SECURE ACCESS</span><h1 id="authTitle">Welcome back</h1><p id="authSubtitle">Sign in to continue to your campus navigation portal.</p></div>
+      <div class="auth-tabs"><button type="button" class="auth-tab active" data-auth-tab="login">Login</button><button type="button" class="auth-tab" data-auth-tab="signup">Create Account</button></div>
+      <form id="loginForm" class="auth-form" autocomplete="off">
+        <label>Username<input id="loginUsername" name="campus_login_username" autocomplete="off" maxlength="20" placeholder="Enter your username" required></label>
+        <label>Password<div class="password-wrap"><input id="loginPassword" name="campus_login_password" type="password" autocomplete="new-password" placeholder="Enter your password" required><button type="button" class="password-toggle" data-toggle-password="loginPassword">Show</button></div></label>
+        <button class="primary auth-submit" type="submit">Sign In</button>
+      </form>
+      <form id="signupForm" class="auth-form hidden">
+        <label>Full Name<input id="signupName" maxlength="50" autocomplete="name" placeholder="e.g. Jeet Samra" required></label>
+        <label>Username<input id="signupUsername" maxlength="20" autocomplete="username" placeholder="e.g. jeetsamra01" required></label>
+        <div class="auth-help">Username: 4–20 characters, starts with a letter, letters/numbers/underscore only.</div>
+        <label>Password<div class="password-wrap"><input id="signupPassword" type="password" maxlength="40" autocomplete="new-password" placeholder="Letters + digits required" required><button type="button" class="password-toggle" data-toggle-password="signupPassword">Show</button></div></label>
+        <div class="auth-help">Password: minimum 8 characters and must contain at least one letter and one digit.</div>
+        <label>Confirm Password<div class="password-wrap"><input id="signupConfirm" type="password" maxlength="40" autocomplete="new-password" placeholder="Re-enter password" required><button type="button" class="password-toggle" data-toggle-password="signupConfirm">Show</button></div></label>
+        <button class="primary auth-submit" type="submit">Create Account</button>
+      </form>
+      <div id="authMessage" class="auth-message" role="alert"></div>
+      <div class="auth-footer">Enter your own credentials to continue. Administrator access is handled automatically from the same login.</div>
+    </div>
+  </div>
+</div>
+<div id="adminPortal" class="admin-overlay" aria-hidden="true">
+  <div class="admin-panel">
+    <div class="admin-panel-head"><div><span class="eyebrow">ADMINISTRATOR · CONTROL CENTER</span><h1>Campus Control Center</h1><p>Manage navigation, campus setup and registered accounts from one secure workspace.</p></div><button id="adminClose" class="secondary">← Back to Project</button></div>
+    <div class="admin-stats"><div class="card"><span>Registered Users</span><b id="adminUserCount">0</b></div><div class="card"><span>Buildings</span><b id="adminBuildingCount">0</b></div><div class="card"><span>Roads</span><b id="adminRoadCount">0</b></div><div class="card"><span>System</span><b>Online</b></div></div>
+    <div class="admin-grid">
+      <section class="card admin-card"><div class="card-head"><div><span class="eyebrow">PROJECT ACCESS</span><h2>Open main modules</h2></div></div><p class="subtext">The admin uses the exact same navigation and campus setup modules as the main project.</p><div class="admin-actions"><button id="adminOpenNavigator" class="primary">🧭 Open Navigator</button><button id="adminOpenSetup" class="secondary">🏗️ Campus Setup</button><button id="adminOpenReports" class="danger-outline">📥 Crisis Control (<span id="adminRepBadge">0</span> open)</button></div></section>
+      <section id="adminReportsCard" class="card admin-card"><div class="card-head"><div><span class="eyebrow">USER REPORTS</span><h2>Live crises</h2></div></div><div class="report-admin-shortcut"><p class="subtext">All walker issues are sent to the Crisis Manager automatically. Open it to review, close, fix, edit or delete every issue from one table.</p><button id="adminReportsShortcut" class="primary">Open Crisis Manager</button></div></section>
+      <section class="card admin-card"><div class="card-head"><div><span class="eyebrow">USER MANAGEMENT</span><h2>Registered accounts</h2></div></div><div id="adminUsers" class="admin-users"></div></section>
+      <section class="card admin-card"><div class="card-head"><div><span class="eyebrow">CAMPUS CONTROL</span><h2>System actions</h2></div></div><p class="subtext">Restore the original campus graph if custom buildings or roads need to be cleared.</p><button id="adminResetCampus" class="danger-outline">Restore Sample Campus</button></section>
+      <section class="card admin-card"><div class="card-head"><div><span class="eyebrow">ANNOUNCEMENT</span><h2>Campus notice</h2></div></div><textarea id="noticeText" rows="3" maxlength="200" placeholder="e.g. Library closed today after 4 PM" style="width:100%;margin-top:10px;padding:10px;border-radius:10px"></textarea><div class="admin-actions" style="margin-top:8px"><button id="postNotice" class="primary">Post Notice</button><button id="clearNotice" class="secondary">Clear</button></div></section>
+      <section class="card admin-card"><div class="card-head"><div><span class="eyebrow">TRIP HISTORY</span><h2>Recent journeys</h2></div></div><div id="adminHistory" class="admin-users"></div><div class="admin-actions"><button id="exportBtn" class="secondary">⬇ Export Campus</button><button id="importBtn" class="secondary">⬆ Import Campus</button><input id="importFile" type="file" accept=".json" hidden></div></section>
+      <section class="card admin-card"><div class="card-head"><div><span class="eyebrow">ACCOUNT</span><h2>Current administrator</h2></div></div><div id="adminCurrentAccount" class="account-summary"></div><button id="adminLogout" class="primary">Logout</button></section>
+    </div>
+  </div>
+</div>
+<header class="topbar">
+  <div class="brand"><div class="logo">CC</div><div><strong>Campus Navigator</strong><small>Smart campus route planning with dynamic rerouting</small></div></div>
+  <div class="top-actions"><span id="accountBadge" class="account-badge">Guest</span><span class="online"><i></i> System Online</span><button id="muteBtn" class="icon-btn" title="Voice on" aria-label="Toggle voice">🔊</button><button id="themeBtn" class="icon-btn" title="Theme">☾</button><button id="logoutBtn" class="icon-btn logout-btn" title="Logout">↪</button></div>
+</header>
+
+<main class="container">
+  <section id="homePage" class="page active">
+    <div class="welcome card">
+      <div><span class="eyebrow">CAMPUS NAVIGATION</span><h1>Find your way across campus.</h1><p>Choose where you are, choose where you want to go, then follow the route step by step. If a road becomes unsafe, the system automatically finds a new way.</p></div>
+</div>
+
+    <div class="choice-grid">
+      <button class="choice-card" id="openNavigator">
+        <span class="choice-icon">🧭</span><div><h2>Start Navigation</h2><p>Find routes, choose a road and walk through the campus step by step.</p></div><span class="arrow">→</span>
+      </button>
+      <button class="choice-card" id="openEditor">
+        <span class="choice-icon">🏗️</span><div><h2>Campus Setup</h2><p>Add your own buildings and roads with your own distance or cost.</p></div><span class="arrow">→</span>
+      </button>
+      <button class="choice-card" id="openReports" hidden>
+        <span class="choice-icon">📥</span><div><h2>User Reports (<span id="homeRepBadge">0</span> open)</h2><p>See problems users faced while walking — fire, flood, blocked roads — and fix them.</p></div><span class="arrow">→</span>
+      </button>
+    </div>
+
+    <div class="mini-stats">
+      <div><b id="homeBuildings">11</b><span>Buildings</span></div><div><b id="homeRoads">21</b><span>Roads</span></div><div><b>2</b><span>Algorithms (Floyd-Warshall + DFS)</span></div>
+    </div>
+  </section>
+
+  <section id="navigatorPage" class="page">
+    <div class="page-head"><button class="back-btn" id="backHome1">← Home</button><div><span class="eyebrow">NAVIGATION</span><h1>Plan your journey</h1></div></div>
+
+    <div class="card planner">
+      <div class="planner-grid">
+        <label><span>Start</span><select id="startSelect"></select></label>
+        <div class="swap" id="swapBtn" title="Swap start and destination" role="button" tabindex="0">⇄</div>
+        <label><span>Destination</span><select id="goalSelect"></select></label>
+        <button id="findRoutes" class="primary">Find Routes</button>
+      </div>
+      <div id="routeSummary" class="summary">Select your start and destination.</div><div id="noticeBar" class="notice-bar" hidden></div>
+      <details id="myHist" class="my-hist"><summary>📜 My Journey History (<span id="myHistCount">0</span>)</summary><div id="myHistList"></div><button id="clearMyHist" type="button" class="secondary" style="margin-top:8px">Clear my history</button></details>
+      </div>
+    <div class="nav-layout">
+      <section class="card map-card">
+        <div class="card-head"><div><span class="eyebrow">LIVE CAMPUS</span><h2>Campus Map</h2></div><span id="statusDot" class="status ready">Ready</span></div>
+        <div id="alertBar" class="alert-bar" hidden></div>
+        <div class="legend"><span><i class="dot start-dot"></i> Start</span><span><i class="dot route-dot"></i> Route</span><span><i class="dot blocked-dot"></i> Blocked (live)</span><span><i class="dot" style="background:#7b8797"></i> Closed by admin</span><span><i class="dot current-dot"></i> You are here</span></div>
+        <div id="campusMap" class="campus-map"></div>
+      </section>
+
+      <aside class="side-column">
+        <section class="card route-card">
+          <div class="card-head"><div><span class="eyebrow">ROUTE OPTIONS</span><h2>Choose a route</h2></div><span id="routeCount" class="count-badge">0</span></div>
+          <div id="routesList" class="routes-list"><div class="empty">Routes will appear here.</div></div>
+        </section>
+
+        <section class="card walk-card">
+          <div class="card-head"><div><span class="eyebrow">WALKING</span><h2>Next step</h2></div><span id="stepBadge" class="status ready">Ready</span></div>
+          <div class="you-are"><span>You are here</span><b id="currentLocation">—</b><span>Going to</span><b id="currentGoal">—</b></div>
+          <div id="directionBox" class="direction-box"><span class="direction-icon">🧭</span><div><small>Next location</small><b>Find a route first</b></div></div>
+          <div class="progress-track"><div id="progressBar"></div></div>
+          <div id="journeySteps" class="journey-steps"><div class="empty">Select a route to begin.</div></div>
+          <div id="liveStats" class="live-stats">Press Start Walking, then press Next at each building.</div><div class="walk-actions"><button id="startNavBtn" class="primary">Start Walking</button><button id="nextBtn" class="next-btn">Next →</button><button id="changeRouteBtn" class="secondary">Change Route</button><button id="autoWalkBtn" class="secondary">Auto-walk</button></div>
+          <div id="walkNotice" class="walk-notice"><b>Walking mode</b><br>Follow the highlighted road. Press Next → to walk to each building. Your 🚶 moves and the app speaks each stop. A safety alert will appear automatically if a road becomes blocked.</div>
+        </section>
+
+        <section class="card cost-card"><div class="card-head"><div><span class="eyebrow">ALGORITHM COST</span><h2>Journey cost</h2></div></div><div id="costBody" class="cost-body"></div></section>
+<section class="card feed-card"><div class="card-head"><div><span class="eyebrow">LIVE</span><h2>Updates</h2><small id="feedRouteLabel" class="feed-route-label">No active route</small></div></div><div id="notificationFeed" class="feed"></div></section>
+      </aside>
+    </div>
+  </section>
+
+  <section id="reportsPage" class="page">
+  <div class="page-head crisis-page-head">
+    <button class="back-btn" id="backHome3">← Home</button>
+    <div><span class="eyebrow">ADMIN CONTROL</span><h1>Crisis Control Center</h1><p class="page-subtitle">Activate, stop, edit and create 12+ campus crisis scenarios from one place.</p></div>
+    <span class="method crisis-open-pill"><span id="repPageOpen">0</span> active</span>
+  </div>
+
+  <div class="crisis-dashboard">
+    <div class="crisis-hero card">
+      <div>
+        <span class="eyebrow">MANUAL CRISIS MANAGEMENT</span>
+        <h2>Control every campus crisis</h2>
+        <p>The administrator controls every crisis scenario here. Optionally, a crisis can also appear while a student is walking; it is reported here automatically and stays active for everyone until you resolve it. Use the hide switch to keep active crises off the map so students only find out while walking.</p>
+        <label class="sim-switch"><input type="checkbox" id="simToggle" checked> <span>Allow a crisis to happen while a student is walking</span></label>
+        <label class="sim-switch"><input type="checkbox" id="hideCrisisToggle"> <span>🙈 Hide crises on the map (students find out only while walking)</span></label>
+        <label class="sim-switch"><span>⏱ Auto-resolve crises after</span> <select id="autoResolveSel"><option value="0">Never</option><option value="1">1 min</option><option value="5">5 min</option><option value="15">15 min</option><option value="60">1 hour</option></select></label>
+      </div>
+      <div class="crisis-hero-icon">⚠</div>
+    </div>
+
+    <div class="crisis-control-grid">
+      <section class="card crisis-panel">
+        <div class="card-head">
+          <div><span class="eyebrow">PREDEFINED CRISES</span><h2>Choose a predefined crisis</h2></div>
+          <span class="mini-status">Admin only</span>
+        </div>
+        <p class="subtext">Choose any saved scenario from the dropdown, preview its road and activate it when you want. Nothing starts automatically.</p>
+        <div class="crisis-selector-row">
+          <select id="crisisCatalogSelect" aria-label="Select predefined crisis"></select>
+          <button id="activateCatalogBtn" class="primary" type="button">Activate Crisis</button>
+        </div>
+        <div id="crisisCatalogPreview" class="crisis-preview"></div>
+      </section>
+
+      <section class="card crisis-panel">
+        <div class="card-head">
+          <div><span class="eyebrow">NEW CRISIS</span><h2>Create your own</h2></div>
+          <span class="mini-status">Custom</span>
+        </div>
+        <p class="subtext">Create a new crisis, save it to the dropdown, and activate it whenever you need it.</p>
+        <div class="new-crisis-form">
+          <label>Crisis name<input id="newCrisisName" maxlength="40" placeholder="e.g. Water pipe burst"></label>
+          <div class="two-col">
+            <label>Type<select id="newCrisisType"><option>Road blocked</option><option>Fire</option><option>Flood</option><option>Road damaged</option><option>Accident</option><option>Gas leak</option><option>Fallen tree</option><option>Construction work</option><option>Burst water pipe</option><option>Big crowd of students</option></select></label>
+            <label>Road<select id="newCrisisRoad"></select></label>
+          </div>
+          <label>Short note<input id="newCrisisNote" maxlength="100" placeholder="Optional description"></label>
+          <button id="createCrisisBtn" class="secondary wide-btn" type="button">＋ Add to Crisis List</button>
+        </div>
+      </section>
+    </div>
+
+    <section class="card crisis-panel crisis-list-panel">
+      <div class="card-head">
+        <div><span class="eyebrow">CRISIS LIBRARY</span><h2>Manage your crisis scenarios</h2><p class="subtext">Start, stop, edit or remove any saved scenario without changing the campus graph manually.</p></div>
+        <div class="crisis-list-stats"><span><b id="catalogCount">0</b> saved</span><span><b id="catalogActive">0</b> active</span></div>
+      </div>
+      <div id="crisisCatalogList"></div>
+    </section>
+
+    <section class="card crisis-panel active-crisis-panel">
+      <div class="card-head">
+        <div><span class="eyebrow">LIVE STATUS</span><h2>Live active crises</h2></div>
+        <button id="clearAllActiveCrises" class="secondary" type="button">Stop All</button>
+      </div>
+      <div id="activeCrisisList"></div>
+    </section>
+
+    <section class="card crisis-panel" id="activityPanel">
+      <div class="card-head">
+        <div><span class="eyebrow">ADMIN ACTIVITY</span><h2>Crisis activity log</h2></div>
+        <div class="act-tools"><button id="actClear" class="secondary" type="button">Clear log</button></div>
+      </div>
+      <div id="actStats" class="act-stats"></div>
+      <div id="actList"></div>
+    </section>
+
+    <div id="crisisLog" class="legacy-crisis-log"></div>
+    <div id="reportsPageList" class="admin-users" style="display:none"></div>
+  </div>
+</section>
+
+  <section id="editorPage" class="page">
+    <div class="page-head"><button class="back-btn" id="backHome2">← Home</button><div><span class="eyebrow">CAMPUS SETUP</span><h1>Edit your campus</h1></div><span class="method">Optional</span></div>
+    <div class="editor-layout">
+      <div class="editor-left">
+        <section class="card editor-card"><div class="card-head"><div><span class="eyebrow">BUILDINGS</span><h2>Add a building</h2></div><span class="count-badge" id="editorBuildingCount">11</span></div>
+          <p class="subtext">Add a new campus building without moving or changing the original campus. A suitable open position is selected automatically.</p>
+          <div class="editor-form building-form"><label>Building ID<input id="nodeId" maxlength="3" placeholder="Auto (optional)" aria-label="Building ID"></label><label>Building name<input id="nodeName" placeholder="New Block"></label><label>Icon<select id="nodeIcon"><option>🏢</option><option>🏫</option><option>📚</option><option>💻</option><option>🔬</option><option>🏠</option><option>🏥</option><option>🚒</option><option>🎭</option><option>🍴</option><option>🚪</option><option>📍</option><option>🏦</option><option>🏪</option><option>🏬</option><option>🏨</option><option>🏛️</option><option>🧪</option><option>🧑‍💻</option><option>🛒</option><option>☕</option><option>🍽️</option><option>🏟️</option><option>⛺</option><option>🚌</option><option>🚉</option><option>🚻</option><option>🛡️</option><option>📮</option><option>🕌</option><option>⛪</option><option>🛕</option><option>🌳</option><option>⚽</option><option>🏋️</option><option>🎨</option></select></label><button id="addNode" type="button" class="primary add-action">+ Add Building</button></div>
+          <div class="editor-tip"><b>Smart position:</b> the system finds the clearest open area on the map so new buildings do not cover existing ones.</div>
+          <div class="list-head"><span>Campus buildings</span><small>Original buildings are protected</small></div><div id="buildingList" class="item-list"></div>
+          <div class="bulk-actions"><button id="removeAllBuildings" type="button" class="danger-outline">Remove All Added Buildings</button></div>
+        </section>
+        <section class="card editor-card"><div class="card-head"><div><span class="eyebrow">ROADS</span><h2>Add your own road</h2></div><span class="count-badge" id="editorRoadCount">21</span></div>
+          <p class="subtext">Connect two buildings. The road uses their existing map positions and your distance/cost.</p>
+          <div class="editor-form road-form"><label>From<select id="edgeFrom"></select></label><label>To<select id="edgeTo"></select></label><label>Distance / Cost<input id="edgeWeight" type="number" min="1" value="5"></label><button id="addEdge" type="button" class="primary add-action">+ Add Road</button></div>
+          <div class="editor-tip"><b>Same campus:</b> roads are drawn directly between the selected building icons. Existing roads are not moved.</div>
+          <div class="list-head"><span>Campus roads</span><small>Original roads are protected</small></div><div id="roadList" class="item-list"></div>
+          <div class="bulk-actions"><button id="removeAllRoads" type="button" class="danger-outline">Remove All Added Roads</button></div>
+        </section>
+        <div class="editor-footer card"><div><b>Restore sample campus</b><span>Returns the graph to the original 12 AGC buildings and 20 roads. Custom additions are removed.</span></div><button id="resetGraph" class="secondary">Restore Sample Campus</button></div>
+      </div>
+      <section class="card editor-preview"><div class="card-head"><div><span class="eyebrow">LIVE PREVIEW</span><h2>Your campus graph</h2></div><span class="method">Updates instantly</span></div>
+        <p class="subtext">See the exact position of every building and road while you edit. Original buildings keep their positions.</p>
+        <div id="editorMap" class="editor-map"></div>
+        <div class="editor-legend"><span><i class="legend-line original"></i> Original road</span><span><i class="legend-line custom"></i> Added road</span><span>📍 Smart-fit building position</span><span>🔒 Original items protected</span></div>
+      </section>
+
+    </div>
+  </section>
+</main>
+<div id="crisisDialog" class="dialog-backdrop" aria-hidden="true">
+  <div class="crisis-dialog" role="dialog" aria-modal="true">
+    <div id="dialogIcon" class="dialog-icon">🚨</div>
+    <span id="dialogTag" class="dialog-tag">SAFETY ALERT</span>
+    <h2 id="dialogTitle">Road blocked</h2>
+    <p id="dialogText">A road ahead is blocked. The system will calculate a safer path from your current location.</p>
+    <div id="dialogRoute" class="dialog-route"></div>
+    <button id="dialogOk" class="primary dialog-ok">OK</button>
+  </div>
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="script.js?v=live1"></script>
+</body></html>
