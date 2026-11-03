@@ -58,13 +58,16 @@ The map opens on the Satellite layer. When a building is dragged to its real spo
 
 <img width="1366" height="900" alt="3-home" src="https://github.com/user-attachments/assets/98a15836-6128-427f-9efb-cd5ce61bbc0c" />
 
-<img width="1366" height="900" alt="4-navigator-routes" src="https://github.com/user-attachments/assets/999dceb1-3903-4dab-a756-384d315d0fd3" />
+<img width="1590" height="956" alt="Screenshot 2026-11-03 190406" src="https://github.com/user-attachments/assets/e13deb84-065a-4d08-8051-6314c5d26198" />
 
-<img width="1366" height="900" alt="5-navigator-dark" src="https://github.com/user-attachments/assets/d56eecd2-c7c4-4a93-881d-f07dd80c6adb" />
+<img width="1600" height="953" src="https://github.com/user-attachments/assets/d109faab-aa6e-4c95-8d48-9a25f84940c8" />
+
+<img width="1601" height="956" src="https://github.com/user-attachments/assets/71e7c92b-7762-4e68-8fed-9c5f00c63313" />
+
+<img width="1621" height="962" src="https://github.com/user-attachments/assets/f7cd79eb-0387-4b4c-bed7-4f073402c94e" />
+
+<img width="1618" height="967" src="https://github.com/user-attachments/assets/da1a6976-86e1-4f2c-877f-da1ce4464a63" />
 
 <img width="1366" height="900" alt="6-campus-setup" src="https://github.com/user-attachments/assets/29a1a76d-1a73-4c31-ae5e-6d4602491580" />
 
 <img width="1366" height="900" alt="7-reports" src="https://github.com/user-attachments/assets/c4a1813a-20b2-4bd6-acfb-4054a8627b28" />
-
-
-
