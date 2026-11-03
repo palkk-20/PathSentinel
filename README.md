@@ -49,3 +49,14 @@ The map is a real Leaflet map (Street/OSM and Satellite layers, zoom and drag). 
 - Saved browser data from the old sample campus uses new storage keys, so the old sample data and reports are not loaded.
 
 The map opens on the Satellite layer. When a building is dragged to its real spot with `📍 Place buildings`, the cost of every road touching it is recalculated as the real map distance in metres.
+
+## Screenshots
+
+<img width="1366" height="900" alt="7-reports" src="https://github.com/user-attachments/assets/96645fe1-a0bc-46d9-b238-c9d67aa7bf4e" />
+<img width="1366" height="900" alt="6-campus-setup" src="https://github.com/user-attachments/assets/b7c5f5a0-5a7f-4959-af9c-aa7a807ac0a6" />
+<img width="1366" height="900" alt="5-navigator-dark" src="https://github.com/user-attachments/assets/e3c4863a-5747-4bba-ba0e-04ae2e2f50b6" />
+<img width="1366" height="900" alt="4-navigator-routes" src="https://github.com/user-attachments/assets/95349aca-2e18-47bb-a9a1-8e4564c1a8ae" />
+<img width="1366" height="900" alt="3-home" src="https://github.com/user-attachments/assets/a62502cd-dbf7-43e1-8b50-71248ae8c995" />
+<img width="1366" height="900" alt="2-create-account" src="https://github.com/user-attachments/assets/d4f4d2a6-96ea-4b9d-a6b5-4c91bd99e222" />
+<img width="1366" height="900" alt="1-login" src="https://github.com/user-attachments/assets/149aa8a4-9369-4da2-85c9-afcd00fd7f02" />
+
