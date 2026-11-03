@@ -52,12 +52,19 @@ The map opens on the Satellite layer. When a building is dragged to its real spo
 
 ## Screenshots
 
-<img width="1366" height="900" alt="7-reports" src="https://github.com/user-attachments/assets/72e999f8-efd6-4766-bc32-0539393b6387" />
-<img width="1366" height="900" alt="6-campus-setup" src="https://github.com/user-attachments/assets/99cabb98-dd9c-4f35-ac30-b8cc2016014d" />
-<img width="1366" height="900" alt="5-navigator-dark" src="https://github.com/user-attachments/assets/2cbdf15b-8964-47b2-9efb-1dad2a4c3b0a" />
-<img width="1366" height="900" alt="4-navigator-routes" src="https://github.com/user-attachments/assets/b894fb48-b0eb-4147-b57c-31b6d6750a93" />
-<img width="1366" height="900" alt="3-home" src="https://github.com/user-attachments/assets/57e05274-6a65-41b8-874f-4bbfd86acced" />
-<img width="1366" height="900" alt="2-create-account" src="https://github.com/user-attachments/assets/d30c4883-7fb3-4c43-9cf0-cbe4970df8e5" />
-<img width="1366" height="900" alt="1-login" src="https://github.com/user-attachments/assets/eb7ac4c1-a9ae-4690-a7a8-36d615c59ba8" />
+<img width="1366" height="900" alt="1-login" src="https://github.com/user-attachments/assets/504a4138-4a36-4332-bdfc-f0bfedfff311" />
+
+<img width="1366" height="900" alt="2-create-account" src="https://github.com/user-attachments/assets/6aa12660-2528-46f3-9ffe-0b1c0094c633" />
+
+<img width="1366" height="900" alt="3-home" src="https://github.com/user-attachments/assets/98a15836-6128-427f-9efb-cd5ce61bbc0c" />
+
+<img width="1366" height="900" alt="4-navigator-routes" src="https://github.com/user-attachments/assets/999dceb1-3903-4dab-a756-384d315d0fd3" />
+
+<img width="1366" height="900" alt="5-navigator-dark" src="https://github.com/user-attachments/assets/d56eecd2-c7c4-4a93-881d-f07dd80c6adb" />
+
+<img width="1366" height="900" alt="6-campus-setup" src="https://github.com/user-attachments/assets/29a1a76d-1a73-4c31-ae5e-6d4602491580" />
+
+<img width="1366" height="900" alt="7-reports" src="https://github.com/user-attachments/assets/c4a1813a-20b2-4bd6-acfb-4054a8627b28" />
+
 
 
