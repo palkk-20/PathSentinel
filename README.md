@@ -52,11 +52,12 @@ The map opens on the Satellite layer. When a building is dragged to its real spo
 
 ## Screenshots
 
-<img width="1366" height="900" alt="7-reports" src="https://github.com/user-attachments/assets/96645fe1-a0bc-46d9-b238-c9d67aa7bf4e" />
-<img width="1366" height="900" alt="6-campus-setup" src="https://github.com/user-attachments/assets/b7c5f5a0-5a7f-4959-af9c-aa7a807ac0a6" />
-<img width="1366" height="900" alt="5-navigator-dark" src="https://github.com/user-attachments/assets/e3c4863a-5747-4bba-ba0e-04ae2e2f50b6" />
-<img width="1366" height="900" alt="4-navigator-routes" src="https://github.com/user-attachments/assets/95349aca-2e18-47bb-a9a1-8e4564c1a8ae" />
-<img width="1366" height="900" alt="3-home" src="https://github.com/user-attachments/assets/a62502cd-dbf7-43e1-8b50-71248ae8c995" />
-<img width="1366" height="900" alt="2-create-account" src="https://github.com/user-attachments/assets/d4f4d2a6-96ea-4b9d-a6b5-4c91bd99e222" />
-<img width="1366" height="900" alt="1-login" src="https://github.com/user-attachments/assets/149aa8a4-9369-4da2-85c9-afcd00fd7f02" />
+<img width="1366" height="900" alt="7-reports" src="https://github.com/user-attachments/assets/72e999f8-efd6-4766-bc32-0539393b6387" />
+<img width="1366" height="900" alt="6-campus-setup" src="https://github.com/user-attachments/assets/99cabb98-dd9c-4f35-ac30-b8cc2016014d" />
+<img width="1366" height="900" alt="5-navigator-dark" src="https://github.com/user-attachments/assets/2cbdf15b-8964-47b2-9efb-1dad2a4c3b0a" />
+<img width="1366" height="900" alt="4-navigator-routes" src="https://github.com/user-attachments/assets/b894fb48-b0eb-4147-b57c-31b6d6750a93" />
+<img width="1366" height="900" alt="3-home" src="https://github.com/user-attachments/assets/57e05274-6a65-41b8-874f-4bbfd86acced" />
+<img width="1366" height="900" alt="2-create-account" src="https://github.com/user-attachments/assets/d30c4883-7fb3-4c43-9cf0-cbe4970df8e5" />
+<img width="1366" height="900" alt="1-login" src="https://github.com/user-attachments/assets/eb7ac4c1-a9ae-4690-a7a8-36d615c59ba8" />
+
 
